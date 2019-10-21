@@ -1,0 +1,69 @@
+steps:
+- task: NuGetToolInstaller@0
+  displayName: Use NuGet 4.4.1
+  inputs:
+    versionSpec: 4.4.1
+
+- task: NuGetCommand@2
+  displayName: NuGet restore
+  inputs:
+    restoreSolution: '**/*.sln'
+    vstsFeed: '92f70cf3-0c6d-49fb-8b41-d501852b77c7'
+
+- task: PowerShell@1
+  displayName: Increase Nuget version
+  inputs:
+    scriptName: 'Builds/Scripts/IncreaseRevisionNumberScript.ps1'
+
+- task: PowerShell@1
+  displayName: Create Nuget version
+  inputs:
+    scriptName: 'Builds/Scripts/NugetVersionGeneratorScript.ps1'
+    arguments: '$(MajorNugetVersion) $(MinorNugetVersion) $(RevisionNumber)'
+
+- task: MSBuild@1
+  displayName: Build Messaging
+  inputs:
+    solution: '**/Brainstorm.Messaging/*.csproj'
+    msbuildVersion: 15.0
+    msbuildArguments: '/t:pack /p:Version=$(MajorNugetVersion).$(MinorNugetVersion).$(RevisionNumber) /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
+    configuration: '$(BuildConfiguration)'
+
+- task: MSBuild@1
+  displayName: Build Abstractions
+  inputs:
+    solution: '**/Brainstorm.Messaging.Abstractions/*.csproj'
+    msbuildVersion: 15.0
+    msbuildArguments: '/t:pack /p:Version=$(MajorNugetVersion).$(MinorNugetVersion).$(RevisionNumber) /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
+    configuration: '$(BuildConfiguration)'
+
+
+- task: CopyFiles@2
+  displayName: Copy Files Messaging
+  inputs:
+    SourceFolder: '$(build.Repository.LocalPath)/Brainstorm.Messaging/Brainstorm.Messaging/bin/Release/'
+    Contents: 'Brainstorm.Messaging.$(MajorNugetVersion).$(MinorNugetVersion).$(RevisionNumber).nupkg'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+    OverWrite: true
+
+- task: CopyFiles@2
+  displayName: Copy Files Abstractions
+  inputs:
+    SourceFolder: '$(build.Repository.LocalPath)/Brainstorm.Messaging/Brainstorm.Messaging.Abstractions/bin/Release/'
+    Contents: 'Brainstorm.Messaging.Abstractions.$(MajorNugetVersion).$(MinorNugetVersion).$(RevisionNumber).nupkg'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+    OverWrite: true
+
+- task: NuGetCommand@2
+  displayName: Push Nuget Messaging
+  inputs:
+    command: push
+    packagesToPush: '$(build.artifactstagingdirectory)/Brainstorm.Messaging.$(MajorNugetVersion).$(MinorNugetVersion).$(RevisionNumber).nupkg'
+    publishVstsFeed: '92f70cf3-0c6d-49fb-8b41-d501852b77c7'
+
+- task: NuGetCommand@2
+  displayName: Push Nuget Abstractions
+  inputs:
+    command: push
+    packagesToPush: '$(build.artifactstagingdirectory)/Brainstorm.Messaging.Abstractions.$(MajorNugetVersion).$(MinorNugetVersion).$(RevisionNumber).nupkg'
+    publishVstsFeed: '92f70cf3-0c6d-49fb-8b41-d501852b77c7'

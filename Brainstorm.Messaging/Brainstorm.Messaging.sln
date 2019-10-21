@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brainstorm.Messaging", "Brainstorm.Messaging\Brainstorm.Messaging.csproj", "{97F3F0E3-EAE7-4CD7-9C8F-942357267A5F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{25D2E15D-A8C2-4103-AD19-7ACC370A1BFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brainstorm.MessagingTests", "Tests\Brainstorm.MessagingTests\Brainstorm.MessagingTests.csproj", "{624C110E-784C-40BC-8CAB-3E661D891884}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brainstorm.Integration.MessagingTests", "Tests\Brainstorm.Integration.MessagingTests\Brainstorm.Integration.MessagingTests.csproj", "{C574E60C-1FA2-4D76-A776-4892F625CE7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brainstorm.Messaging.Abstractions", "Brainstorm.Messaging.Abstractions\Brainstorm.Messaging.Abstractions.csproj", "{12128702-976C-4194-8670-BAD0A79AE72B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97F3F0E3-EAE7-4CD7-9C8F-942357267A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F3F0E3-EAE7-4CD7-9C8F-942357267A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F3F0E3-EAE7-4CD7-9C8F-942357267A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F3F0E3-EAE7-4CD7-9C8F-942357267A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624C110E-784C-40BC-8CAB-3E661D891884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624C110E-784C-40BC-8CAB-3E661D891884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624C110E-784C-40BC-8CAB-3E661D891884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624C110E-784C-40BC-8CAB-3E661D891884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C574E60C-1FA2-4D76-A776-4892F625CE7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C574E60C-1FA2-4D76-A776-4892F625CE7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C574E60C-1FA2-4D76-A776-4892F625CE7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C574E60C-1FA2-4D76-A776-4892F625CE7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12128702-976C-4194-8670-BAD0A79AE72B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12128702-976C-4194-8670-BAD0A79AE72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12128702-976C-4194-8670-BAD0A79AE72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12128702-976C-4194-8670-BAD0A79AE72B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{624C110E-784C-40BC-8CAB-3E661D891884} = {25D2E15D-A8C2-4103-AD19-7ACC370A1BFC}
+		{C574E60C-1FA2-4D76-A776-4892F625CE7D} = {25D2E15D-A8C2-4103-AD19-7ACC370A1BFC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C655225-0A5C-4A74-9731-B84DF289058D}
+	EndGlobalSection
+EndGlobal

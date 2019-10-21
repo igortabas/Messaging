@@ -1,0 +1,35 @@
+steps:
+- task: NuGetToolInstaller@0
+  displayName: Use NuGet 4.4.1
+  inputs:
+    versionSpec: 4.4.1
+
+- task: NuGetCommand@2
+  displayName: NuGet restore
+  inputs:
+    restoreSolution: '**/*.sln'
+    vstsFeed: '92f70cf3-0c6d-49fb-8b41-d501852b77c7'
+
+- task: DotNetCoreInstaller@0
+  inputs:
+    version: '2.1.1' 
+    packageType: runtime
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    projects: '$(RestoreBuildProjects)'
+    arguments: '--configuration $(BuildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: '$(TestProjects)'
+    arguments: '--configuration $(BuildConfiguration)'
+
+- task: PublishTestResults@2
+  displayName: Publish Test Results **\TEST-*.xml
+  inputs:
+    testRunner: XUnit
+    mergeTestResults: true
